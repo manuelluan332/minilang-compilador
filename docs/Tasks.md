@@ -63,10 +63,10 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Item e — Interpretador (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | 🔍 | [preencher] | `68c22e0` |
+| Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude, Claude Code, apoio no código) | `68c22e0` |
 | Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | ⬜ | | |
-| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🟡 | [preencher] | `68c22e0` |
-| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🟡 | [preencher] | `68c22e0` |
+| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🟡 | Sim (Claude, Claude Code, apoio nos testes) | `68c22e0` |
+| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🟡 | Sim (Claude, Claude Code, apoio nos testes) | `68c22e0` |
 | Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio.pdf` | DA | AL | ⬜ | | |
 
 ### Item f — Catálogo de erros (1,0)
@@ -134,8 +134,8 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 12/11/2026 | MA | Estrutura inicial do repositório e README | `4a54bb8`, `567b499` | — | |
 | 14/11/2026 | MA | Rascunho de tokens, EBNF, tabela de transições e exemplos | `0203694` | Claude Sonnet 5.5 — rascunho inicial | |
 | 14/11/2026 | MA | Primeira entrada do diário de bordo | `fd6ed77` | — | |
-| 17/11/2026 | DA | Divisão de tarefas (`docs/Tasks.md`) | `088174d` | [preencher] | |
-| 17/11/2026 | DA | Tabela de símbolos, `ErroSemantico` e testes iniciais do interpretador | `68c22e0` | [preencher] | |
+| 17/11/2026 | DA | Divisão de tarefas (`docs/Tasks.md`) | `088174d` | Claude — apoio na organização da divisão de tarefas | |
+| 17/11/2026 | DA | Tabela de símbolos, `ErroSemantico` e testes iniciais do interpretador | `68c22e0` | Claude (Claude Code) — apoio no código e nos testes | |
 | 20/11/2026 | MA | Lexer, testes do lexer, exemplos `.ml` e seção léxica do relatório | `c48e250`, `a3615ec` | Claude Sonnet 5.5 e ChatGPT — código, testes e texto | |
 | | | | | | |
 
