@@ -63,10 +63,10 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Item e — Interpretador (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | ⬜ | | |
+| Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | 🔍 | [preencher] | `68c22e0` |
 | Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | ⬜ | | |
-| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | ⬜ | | |
-| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | ⬜ | | |
+| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🟡 | [preencher] | `68c22e0` |
+| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🟡 | [preencher] | `68c22e0` |
 | Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio.pdf` | DA | AL | ⬜ | | |
 
 ### Item f — Catálogo de erros (1,0)
@@ -107,19 +107,21 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 
 ## Cronograma
 
-O vídeo deve ser entregue **2 dias antes da arguição**. Como o sorteio pode cair em 24/11, o planejamento considera o pior caso: **vídeo até 22/11**.
+A apresentação foi remarcada para **01/12 (ter)**. O vídeo deve ser entregue **2 dias antes da arguição**, ou seja, até 29/11. Meta do grupo: **tudo pronto até 26/11 (qui)**, deixando sexta a domingo como folga para ajustes.
 
 | Data | Meta | Quem |
 |---|---|---|
 | 12–14/11 | Estrutura do repositório, rascunho da gramática | MA ✅ |
-| 17/11 (ter) | Revisar a gramática e fechar as decisões em aberto · `ast_nodes.py` | Todos · AL |
-| 18/11 (qua) | Lexer e testes · tabela de símbolos | MA · DA |
-| 19/11 (qui) | Parser e testes · interpretador | AL · DA |
-| 20/11 (sex) | Integração, testes de laço, catálogo de erros, exemplos `.ml` | Todos |
-| 21/11 (sáb) | Relatório em PDF, README, declaração de IA | Todos |
-| 22/11 (dom) | **Gravar e entregar o vídeo** | Todos |
-| 23/11 (seg) | Ensaio da arguição e revisão final | Todos |
-| 24/11 ou 01/12 | Apresentação | Todos |
+| 17/11 (ter) | Divisão de tarefas · tabela de símbolos | DA ✅ |
+| 20/11 (sex) | Lexer e testes · exemplos `.ml` · seção léxica do relatório | MA ✅ |
+| 23/11 (seg) | `ast_nodes.py` (**urgente: destrava o interpretador**) · fechar as decisões em aberto · revisões dos itens a e b | AL · Todos · DA, AL |
+| 24/11 (ter) | Parser e testes · interpretador sobre a AST | AL · DA |
+| 25/11 (qua) | Integração, testes de laço, catálogo de erros · revisões cruzadas · seções do relatório | Todos |
+| 26/11 (qui) | **Tudo pronto:** relatório em PDF, README, declaração de IA e **gravação do vídeo** | Todos |
+| 27–28/11 (sex–sáb) | Folga para ajustes e correções | Todos |
+| 29/11 (dom) | **Prazo de entrega do vídeo** (2 dias antes da arguição) | Todos |
+| 30/11 (seg) | Ensaio da arguição e revisão final | Todos |
+| 01/12 (ter) | **Apresentação** | Todos |
 
 ---
 
@@ -132,6 +134,9 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 12/11/2026 | MA | Estrutura inicial do repositório e README | `4a54bb8`, `567b499` | — | |
 | 14/11/2026 | MA | Rascunho de tokens, EBNF, tabela de transições e exemplos | `0203694` | Claude Sonnet 5.5 — rascunho inicial | |
 | 14/11/2026 | MA | Primeira entrada do diário de bordo | `fd6ed77` | — | |
+| 17/11/2026 | DA | Divisão de tarefas (`docs/Tasks.md`) | `088174d` | [preencher] | |
+| 17/11/2026 | DA | Tabela de símbolos, `ErroSemantico` e testes iniciais do interpretador | `68c22e0` | [preencher] | |
+| 20/11/2026 | MA | Lexer, testes do lexer, exemplos `.ml` e seção léxica do relatório | `c48e250`, `a3615ec` | Claude Sonnet 5.5 e ChatGPT — código, testes e texto | |
 | | | | | | |
 
 ## Resumo por integrante
@@ -139,5 +144,5 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | Integrante | Itens como responsável | Itens como revisor | Commits |
 |---|---|---|---|
 | Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 0 |
-| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 0 |
-| Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 4 |
+| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 2 |
+| Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 6 |
