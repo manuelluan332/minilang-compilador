@@ -11,3 +11,20 @@ A implementação foi submetida a testes automatizados com Pytest. Na execução
 O uso dessas ferramentas contribuiu para o desenvolvimento e a compreensão dos conceitos estudados. Entretanto, os resultados dos testes não garantem a ausência de erros em todos os cenários possíveis.
 
 **Modelos utilizados:** informar as versões específicas do Claude e do ChatGPT utilizadas durante o desenvolvimento.
+
+### Uso de inteligência artificial na Análise Semântica (Davi)
+
+**Ferramenta/modelo:** Claude, da Anthropic, via Claude Code (Claude Opus 5.5 na sessão de 22/11).
+
+**Etapas em que foi usada:** divisão de tarefas do grupo (`docs/Tasks.md`), tabela de
+símbolos e exceção `ErroSemantico` (`src/interpreter.py`), testes do interpretador,
+revisão da definição formal e do lexer, atualização do cronograma e redação da
+entrada no diário de bordo.
+
+**Finalidade:** apoio na geração de código e testes, revisão do trabalho dos colegas e organização da documentação.
+
+**O que foi aceito, reescrito ou descartado:** o código da tabela de símbolos e os
+testes foram aceitos depois de revisão e da execução com Pytest (34 testes aprovados).
+Da revisão dos itens a e b, aceitei as observações e deixei a padronização das
+mensagens de erro para o catálogo do item (f). Os textos de documentação foram
+revisados antes de cada commit.
