@@ -140,6 +140,8 @@ class Lexer:
             if c in ESPACOS:
                 self._avancar()
                 continue
+            # q_div: '/' seguida de '/' ou '*' abre comentário (decidido por
+            # lookahead, sem consumir); caso contrário cai em q_sym e vira SLASH
             if c == "/" and self._seguinte() in ("/", "*"):
                 self._pular_comentario()
                 continue
@@ -203,7 +205,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("uso: python -m src.lexer <arquivo.ml>")
         sys.exit(2)
-    with open(sys.argv[1], encoding="utf-8") as arquivo:
+    with open(sys.argv[1], encoding="utf-8-sig") as arquivo:
         texto = arquivo.read()
     try:
         for t in tokenizar(texto):
