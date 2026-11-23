@@ -10,7 +10,13 @@ A implementação foi submetida a testes automatizados com Pytest. Na execução
 
 O uso dessas ferramentas contribuiu para o desenvolvimento e a compreensão dos conceitos estudados. Entretanto, os resultados dos testes não garantem a ausência de erros em todos os cenários possíveis.
 
-**Modelos utilizados:** informar as versões específicas do Claude e do ChatGPT utilizadas durante o desenvolvimento.
+Na definição formal da linguagem (`docs/gramatica.md`: tokens, EBNF, precedência, tabela de
+transições e os 5 exemplos) e nos programas de exemplo (`exemplos/*.ml`), o Claude gerou o
+rascunho inicial. O código do lexer (`src/lexer.py`) e os testes do lexer
+(`tests/validos/test_lexer_valido.py` e `tests/invalidos/test_lexer_invalido.py`) também
+foram gerados pelo Claude e, em seguida, executados e conferidos por mim (Manuel).
+
+**Modelos utilizados:** Claude Sonnet 5.5 (Anthropic) e ChatGPT (GPT-6, OpenAI).
 
 ### Uso de inteligência artificial na Análise Semântica (Davi)
 
