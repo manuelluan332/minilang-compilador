@@ -11,8 +11,7 @@ semânticas, tabela de transições do lexer e 5 programas de exemplo.
 tokens, EBNF, tabela de transições e exemplos justificados, a partir
 da especificação do enunciado.
 
-**O que revisamos/alteramos:** [preencher: o que você conferiu, mudou
-ou descartou e por quê]
+**O que revisamos/alteramos:** Li o rascunho completo e conferi se as tabelas renderizaram corretamente no GitHub. Mantive as decisões de projeto como proposta para o grupo confirmar (comentário `/* */` como extensão, comparação não associativa, sem menos unário e corpo sempre em bloco). A conferência da tabela de transições contra o código foi feita em 18/11, ao executar o lexer e os testes (ver entrada seguinte).
 
 **Decisões em aberto:** comentário de bloco (/* */) incluído para dar
 sentido ao teste "comentário não fechado"; comparação não associativa;
@@ -79,3 +78,20 @@ para 01/12 e a meta de terminar tudo até 26/11, o cronograma ficou apertado.
 **Próximos passos:** avaliar a AST sobre a tabela de símbolos (incluindo while e
 for), verificação de tipos S2–S5, testes de laço (0, 1 e N iterações) e de laço
 infinito com limite, e catálogo de erros com mensagens padronizadas nas três fases.
+
+
+## Atualização — 23/11/2026
+
+**Responsável:** Manuel
+
+**Etapa:** correções da revisão do Alexandre (itens a e b).
+
+**O que foi feito:** Recebi a revisão do Alexandre sobre a seção de Análise léxica, a gramática, o `programa_invalido.ml` e o lexer. Corrigi o `requirements.txt` vazio (adicionei `pytest`), a leitura de arquivos com BOM no Windows (`utf-8-sig` em `src/lexer.py`), o comentário sobre o estado `q_div`, que é implementado por lookahead, a justificativa da associatividade, a ligação da justificativa formal com o código (seção 5.2), a nota sobre EOF na tabela e a `declaracao_IA.md` com os modelos usados. Commits: `b37aad9`, `5207802`, `70b0273` e `4af8332`.
+
+**Uso de IA:** O Claude Sonnet 5.5 foi usado para aplicar as correções de código e de documentação e para explicar a passagem de AFN para AFD do token NUM. Conferi cada alteração com `git diff` antes de commitar.
+
+**Testes realizados:** `python3 -m pytest -q`: 34 testes aprovados.
+
+**Dificuldades encontradas:** Distinguir erro léxico de erro sintático (o `programa_invalido.ml` passa pelo lexer sem erro, e só o parser o rejeita) e entender a construção dos subconjuntos do NUM.
+
+**Próximos passos:** Fechar as decisões em aberto com o grupo, escrever o exemplo concreto de uso de IA (2.1) e a justificativa geral (2.2) do relatório e enviar o `.docx` ao Alexandre até 25/11.
