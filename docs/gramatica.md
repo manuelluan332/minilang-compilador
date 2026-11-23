@@ -94,6 +94,10 @@ Observações:
   de `comando` começa com um token distinto (`ID`, `print`, `if`, `while`, `for`, `{`),
   o que a torna adequada a um **parser descendente recursivo preditivo** com 1 token de
   lookahead.
+- **Consequência do corpo sempre em bloco:** `else if` não é aceito, pois o `else` exige
+  `{`; escreve-se `else { if (...) { ... } }`.
+- **Comparações não associam:** `a < b == c` é erro sintático, porque as seis
+  comparações estão no mesmo nível; escreve-se `(a < b) == c`.
 
 ### Precedência e associatividade
 
@@ -105,8 +109,11 @@ Observações:
 | 4 (menor) | `<` `>` `<=` `>=` `==` `!=` | não associativa | `comparacao` |
 
 A precedência vem da **estrutura em níveis** da gramática: quem fica mais fundo
-(`fator`) liga mais forte. A associatividade à esquerda vem do laço `{ ... }`, que
-agrupa `a - b - c` como `(a - b) - c`.
+(`fator`) liga mais forte. A associatividade à esquerda é definida pela tabela acima
+e implementada pelo parser: dentro do laço `{ ... }` ele acumula a árvore pela
+esquerda, agrupando `a - b - c` como `(a - b) - c`. Isso equivale à regra recursiva
+à esquerda `soma = soma ( "+" | "-" ) termo | termo`, reescrita como repetição
+porque um parser descendente não aceita recursão à esquerda.
 
 ## 4. Restrições semânticas (fora da EBNF)
 
@@ -141,6 +148,9 @@ Classes de entrada: **D** = dígito; **L** = letra ou `_`; **sym** = `+ - ( ) { 
 Estados finais sem transições de saída: **q_le** (`<=`), **q_ge** (`>=`), **q_eqeq** (`==`),
 **q_ne** (`!=`), **q_sym**. **q_err** é o estado de erro léxico.
 
+No fim da entrada (EOF), `q0` devolve o token `EOF`; `q_num` e `q_id` aceitam o token
+em andamento; `!` ou comentário de bloco abertos no fim levam a `q_err`.
+
 Estados dos comentários (colunas próprias, pois a classe WS se divide):
 
 | Estado | `\n` | `*` | `/` | EOF | outro |
@@ -149,18 +159,24 @@ Estados dos comentários (colunas próprias, pois a classe WS se divide):
 | q_bc (dentro de `/*`) | q_bc | q_bcs | q_bc | **q_err** (não fechado) | q_bc |
 | q_bcs (viu `*` em `/*`) | q_bc | q_bcs | fim: descarta | **q_err** (não fechado) | q_bc |
 
-### 5.2 justificativa
+### 5.2 Justificativa formal
 
 1. Cada categoria de token tem padrão **regular** (tabela da seção 2).
 2. Pelo teorema de Kleene, toda expressão regular tem um AFN equivalente (construção de
    Thompson), e todo AFN tem um AFD equivalente (construção de subconjuntos).
 3. A união dos padrões, com a regra do maior casamento e a tabela de reservadas
    aplicada a `ID`, dá o autômato da seção 5.1.
-4. Logo, o lexer reconhece exatamente os lexemas de L(token) para cada token da
+4. **Ligação com o código** (`src/lexer.py`): cada estado da tabela corresponde a um
+   bloco de `proximo()`, marcado por comentário (`# q_num`, `# q_id`, `# q_lt, q_gt, q_eq`,
+   `# q_bang`, `# q_sym`, `# q_err`). Há duas exceções: `q_div` não tem bloco próprio, pois a
+   decisão é tomada olhando o caractere seguinte (`_seguinte()`) sem consumi-lo, e, se a `/`
+   não abre comentário, ela cai em `q_sym` e vira `SLASH`; e os estados `q_lc`, `q_bc` e
+   `q_bcs` ficam em `_pular_comentario()`.
+5. Logo, o lexer reconhece exatamente os lexemas de L(token) para cada token da
    linguagem; qualquer entrada que leve a `q_err` não pertence à linguagem léxica.
 
-> O grupo deve reescrever e aprofundar este rascunho no `docs/relatorio.pdf`
-> (seção "Análise léxica"), mostrando o AFN/AFD de pelo menos um token (ex.: `NUM`).
+A justificativa completa, com o AFN/AFD do token `NUM`, está na seção "Análise léxica"
+do `docs/relatorio.pdf`.
 
 ## 6. Programas de exemplo
 
