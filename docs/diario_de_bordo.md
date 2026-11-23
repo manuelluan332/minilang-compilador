@@ -79,3 +79,53 @@ para 01/12 e a meta de terminar tudo até 26/11, o cronograma ficou apertado.
 **Próximos passos:** avaliar a AST sobre a tabela de símbolos (incluindo while e
 for), verificação de tipos S2–S5, testes de laço (0, 1 e N iterações) e de laço
 infinito com limite, e catálogo de erros com mensagens padronizadas nas três fases.
+
+## Atualização — 22/11/2026
+
+**Responsável:** Alexandre
+
+**Etapa:** AST e parser (itens c e d) e fechamento das decisões em aberto da gramática.
+
+**O que foi feito:** classes da AST em `src/ast_nodes.py`, uma por construção da EBNF
+(`Programa`, `Bloco`, `Atribuicao`, `Print`, `If`, `While`, `For`, `BinOp`, `Num`, `Bool`, `Var`),
+com linha e coluna em todo nó para as mensagens de erro do interpretador. `For` tem os campos
+`inicializacao`, `condicao`, `atualizacao` e `corpo`, com os nomes do item (d). Testes em
+`tests/validos/test_ast.py` (PR #1). Parser descendente recursivo em `src/parser.py`, com um método
+por produção da EBNF, e testes válidos e inválidos (a ser enviado depois do merge da AST). Pedido de
+renomear `docs/Relatorio.pdf` para `docs/relatorio.pdf`, como pede o enunciado (PR #2).
+
+**Decisões em aberto (posição):** concordo com as três decisões propostas na gramática, e o parser
+e o lexer já as implementam:
+
+- *Comentário de bloco `/* */` como extensão:* sem ele, o teste "comentário não fechado" exigido no
+  item (b) não teria sentido, porque `//` sempre termina no fim da linha. Testes:
+  `test_comentario_de_bloco_e_ignorado` e `test_comentario_de_bloco_nao_fechado` (lexer) e
+  `test_comentarios_sao_ignorados` (parser). Exemplo: `x = 1; /* sem fechar` dá
+  "Erro léxico na linha 1, coluna 8: comentário de bloco não fechado".
+- *Comparação não associativa:* a produção `comparacao = soma [ op_comp soma ]` aceita no máximo um
+  operador de comparação. Como o resultado de uma comparação é booleano, `a < b < c` compararia um
+  booleano com um inteiro, o que não faz sentido. No parser, `comparacao()` usa `if` (no máximo uma
+  vez), enquanto `soma()` e `termo()` usam `while` (repetição). Teste: `test_comparacao_nao_associativa`.
+  `x = a < b < c;` dá "Erro sintático na linha 1, coluna 11: esperado ';', encontrado '<'".
+- *Sem menos unário:* não consta na especificação do enunciado; usa-se `0 - x`. O `-` não está no
+  conjunto de início de `fator` (`NUM`, `true`, `false`, `ID`, `(`), então o parser o rejeita.
+  Teste: `test_menos_unario_fora_do_escopo`. `x = -1;` dá "Erro sintático na linha 1, coluna 5:
+  esperado número, 'true', 'false', identificador ou '(', encontrado '-'".
+
+Falta a confirmação do Manuel, que propôs as decisões, para marcar a tarefa como concluída.
+
+**Revisão (itens a e b, autor: Manuel):** [preencher depois de revisar: o que conferi, o que
+encontrei e as observações]
+
+**Uso de IA:** Claude Opus 5.5, via Claude Code, para gerar a AST, o parser e os testes, conferir o
+trabalho contra o enunciado e redigir esta entrada. Revisei o código e o texto antes de registrar.
+A IA errou em pontos que precisaram de correção: os campos do `for` não seguiam os nomes do item (d),
+o README não declarava a ferramenta de IA e o teste da AST dependia do parser. Os detalhes estão em
+`CONTEXTO_IA.md`.
+
+**Testes realizados:** `python -m pytest -q` com a AST e o parser juntos: 75 testes aprovados.
+Os 6 testes das três decisões passam.
+
+**Próximos passos:** enviar o parser depois do merge da AST; escrever as seções dos itens c e d do
+relatório (árvores sintáticas, justificativa formal, comparação com LL(1)/LR e diagrama da AST);
+montar o PDF final.
