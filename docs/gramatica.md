@@ -20,6 +20,8 @@ Decisões de projeto (a confirmar pelo grupo):
 | Menos unário | Fora do escopo (usar `0 - x`) | Não consta na especificação |
 | Comentário de bloco `/* ... */` | Incluído como extensão | Torna significativo o teste "comentário não fechado" exigido no item (b), já que `//` termina sempre no fim da linha |
 | Operadores lógicos (`&&`, `\|\|`, `!`) | Fora do escopo | Não constam na especificação |
+| Divisão inteira | Trunca em direção a zero: `7 / 2 = 3`, `(0 - 7) / 2 = -3` | Comportamento de C e Java; o `//` do Python arredondaria para baixo (`-4`) |
+| Saída de booleanos no `print` | `true` e `false`, como os literais da linguagem | O Python imprimiria `True` e `False` |
 
 ## 2. Alfabeto e tokens
 
@@ -121,7 +123,7 @@ porque um parser descendente não aceita recursão à esquerda.
 |---|---|
 | S1 | Uma variável só pode ser usada depois de receber valor |
 | S2 | Operandos de `+ - * /` devem ser inteiros |
-| S3 | Divisão por zero é erro |
+| S3 | Divisão por zero é erro; a divisão é inteira e trunca em direção a zero |
 | S4 | A condição de `if`, `while` e `for` deve ser booleana |
 | S5 | `< > <= >=` exigem inteiros; `==` e `!=` exigem operandos do mesmo tipo |
 

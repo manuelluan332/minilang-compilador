@@ -99,6 +99,13 @@ def test_laco_for_completo():
     ]
  
  
+def test_bom_no_inicio_e_ignorado():
+    # Arquivos salvos como "UTF-8 com BOM" (comum no Windows) começam com U+FEFF.
+    tokens = tokenizar("﻿x = 1;")
+    assert [t.tipo for t in tokens] == ["ID", "ASSIGN", "NUM", "SEMI", "EOF"]
+    assert (tokens[0].linha, tokens[0].coluna) == (1, 1)
+
+
 def test_programa_completo_sem_erro():
     codigo = """
     // soma decrescente e contagem

@@ -32,6 +32,26 @@ def tipo_de(valor):
     raise TypeError(f"valor sem tipo MiniLang: {valor!r}")
 
 
+def dividir(a, b, linha=None, coluna=None):
+    """Divisão inteira da MiniLang: trunca em direção a zero (S3).
+
+    O operador // do Python arredonda para baixo: (-7) // 2 == -4. A MiniLang
+    segue C e Java e trunca: -7 / 2 == -3. Por isso o quociente é calculado
+    sobre os valores absolutos e o sinal é aplicado depois.
+    """
+    if b == 0:
+        raise ErroSemantico("divisão por zero", linha, coluna)
+    quociente = abs(a) // abs(b)
+    return quociente if (a < 0) == (b < 0) else -quociente
+
+
+def formatar_valor(valor):
+    """Texto que o print mostra: booleanos como 'true'/'false', como no código."""
+    if tipo_de(valor) == TIPO_BOOL:
+        return "true" if valor else "false"
+    return str(valor)
+
+
 @dataclass
 class Simbolo:
     """Entrada da tabela de símbolos."""

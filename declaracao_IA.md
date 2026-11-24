@@ -34,3 +34,19 @@ testes foram aceitos depois de revisão e da execução com Pytest (34 testes ap
 Da revisão dos itens a e b, aceitei as observações e deixei a padronização das
 mensagens de erro para o catálogo do item (f). Os textos de documentação foram
 revisados antes de cada commit.
+
+### Uso de inteligência artificial na Análise Sintática (Alexandre)
+
+<!-- Transcrito da entrada de 22/11 do diário de bordo. Alexandre: conferir e completar. -->
+
+**Ferramenta/modelo:** Claude Opus 5.5 (Anthropic), via Claude Code.
+
+**Etapas em que foi usada:** classes da AST (`src/ast_nodes.py`) e seus testes, parser
+descendente recursivo (`src/parser.py`) e seus testes, conferência do trabalho contra o
+enunciado e redação da entrada no diário de bordo.
+
+**Finalidade:** geração de código e testes e revisão da documentação.
+
+**O que foi aceito, reescrito ou descartado:** o código e o texto foram revisados antes do
+registro. Foram corrigidos três erros da IA: os campos do `for` não seguiam os nomes do
+item (d), o README não declarava a ferramenta de IA e o teste da AST dependia do parser.

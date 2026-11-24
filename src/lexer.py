@@ -76,7 +76,9 @@ def _eh_letra_ou_digito(c):
 
 class Lexer:
     def __init__(self, codigo):
-        self.codigo = codigo
+        # Remove o BOM (U+FEFF) que editores do Windows gravam no início de
+        # arquivos UTF-8; sem isso, ele seria lido como caractere inválido.
+        self.codigo = codigo.removeprefix("﻿")
         self.pos = 0
         self.linha = 1
         self.coluna = 1

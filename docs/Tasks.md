@@ -47,7 +47,7 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Item c — Parser descendente recursivo (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Implementação do parser | `src/parser.py` | AL | MA | ⬜ | | |
+| Implementação do parser | `src/parser.py` | AL | MA | 🟡 | Sim (Claude Opus 5.5, Claude Code, geração do código) | aguardando PR |
 | Testes válidos (incluindo while e for) | `tests/validos/test_parser_valido.py` | AL | MA | ⬜ | | |
 | Testes inválidos (incluindo laço mal formado) | `tests/invalidos/test_parser_invalido.py` | AL | MA | ⬜ | | |
 | Relatório: árvores de `1+2*3`, `(1+2)*3`, while e for, mais a justificativa formal | `docs/relatorio.pdf` | AL | DA | ⬜ | | |
@@ -56,8 +56,8 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Item d — AST (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Classes da AST (incluindo While e For) — **fazer primeiro, porque o interpretador depende delas** | `src/ast_nodes.py` | AL | DA | ⬜ | | |
-| Testes da AST (`1+2*3`, for com 3 cláusulas) | `tests/validos/test_ast.py` | AL | DA | ⬜ | | |
+| Classes da AST (incluindo While e For) — **fazer primeiro, porque o interpretador depende delas** | `src/ast_nodes.py` | AL | DA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código) | `0ba5ceb` |
+| Testes da AST (`1+2*3`, for com 3 cláusulas) | `tests/validos/test_ast.py` | AL | DA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração dos testes) | `0ba5ceb` |
 | Relatório: diagrama da AST e justificativa árvore concreta × AST | `docs/relatorio.pdf` | AL | DA | ⬜ | | |
 
 ### Item e — Interpretador (1,0)
@@ -82,7 +82,7 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 |---|---|---|---|---|---|---|
 | Testes de laço: executa 0, 1 e N vezes; for alterando a variável de controle | `tests/validos/test_lacos.py` | DA | AL | ⬜ | | |
 | Laço infinito com limite de iterações | `tests/invalidos/test_laco_infinito.py` | DA | MA | ⬜ | | |
-| Diário de bordo (cada um registra a própria entrada) | `docs/diario_de_bordo.md` | **Todos** | — | 🟡 | | `fd6ed77` |
+| Diário de bordo (cada um registra a própria entrada) | `docs/diario_de_bordo.md` | **Todos** | — | 🟡 | | `fd6ed77`, `c4c0689`, `eb2e406`, `553dd0d` |
 | Relatório: pergunta de pesquisa + 3 a 4 exemplos de acerto/falha da IA (cada um traz pelo menos 1) | `docs/relatorio.pdf` | **Todos** | — | ⬜ | | |
 | Relatório: fundamentação teórica | `docs/relatorio.pdf` | MA | Todos | ⬜ | | |
 | Montagem final do PDF (2 a 3 páginas na parte de análise) | `docs/relatorio.pdf` | AL | Todos | ⬜ | | |
@@ -99,9 +99,9 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Itens gerais
 | Tarefa | Arquivo | Responsável | Status |
 |---|---|---|---|
-| README: como executar, integrantes, ferramenta de IA | `README.md` | AL | ⬜ |
-| Declaração de IA: ferramenta/modelo, etapas e finalidade | `declaracao_IA.md` | **Todos** (cada um declara o próprio uso) | ⬜ |
-| Dependências (pytest) | `requirements.txt` | MA | ⬜ |
+| README: como executar, integrantes, ferramenta de IA | `README.md` | AL | 🔍 (rascunho feito por DA; falta o comando do parser/interpretador) |
+| Declaração de IA: ferramenta/modelo, etapas e finalidade | `declaracao_IA.md` | **Todos** (cada um declara o próprio uso) | 🟡 (MA e DA feitos; falta AL confirmar a sua) |
+| Dependências (pytest) | `requirements.txt` | MA | ✅ `b37aad9` |
 
 ---
 
@@ -136,13 +136,17 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 14/11/2026 | MA | Primeira entrada do diário de bordo | `fd6ed77` | — | |
 | 17/11/2026 | DA | Divisão de tarefas (`docs/Tasks.md`) | `088174d` | Claude — apoio na organização da divisão de tarefas | |
 | 17/11/2026 | DA | Tabela de símbolos, `ErroSemantico` e testes iniciais do interpretador | `68c22e0` | Claude (Claude Code) — apoio no código e nos testes | |
-| 20/11/2026 | MA | Lexer, testes do lexer, exemplos `.ml` e seção léxica do relatório | `c48e250`, `a3615ec` | Claude Sonnet 5.5 e ChatGPT — código, testes e texto | |
+| 20/11/2026 | MA | Lexer, testes do lexer, exemplos `.ml` e seção léxica do relatório | `c48e250`, `a3615ec` | Claude Sonnet 5.5 e ChatGPT — código, testes e texto | DA, AL |
+| 22/11/2026 | DA | Revisão dos itens a e b, cronograma, diário e declaração de IA | `236dc0b`, `3ea46ed`, `c4c0689` | Claude Opus 5.5 (Claude Code) — revisão e redação | |
+| 22/11/2026 | AL | Classes da AST e testes (PR #1); renomeia `relatorio.pdf` (PR #2); diário e posição sobre as decisões em aberto | `0ba5ceb`, `b419c69`, `eb2e406` | Claude Opus 5.5 (Claude Code) — código, testes e texto | DA |
+| 23/11/2026 | MA | Correções da revisão: `requirements.txt`, BOM no lexer, gramática, declaração de IA, diário | `b37aad9`, `5207802`, `70b0273`, `4af8332`, `553dd0d` | Claude Sonnet 5.5 — correções de código e texto | AL |
+| 24/11/2026 | DA | Merge dos PRs #1 e #2 e do branch de revisão (conflito no diário resolvido); revisão geral; BOM tratado em `tokenizar` + teste; saída esperada nos `.ml`; README; atualização deste arquivo | `dacbd73`, `ef6281a`, `5f20a59` | Claude Opus 5.5 (Claude Code) — revisão, correções e redação | |
 | | | | | | |
 
 ## Resumo por integrante
 
 | Integrante | Itens como responsável | Itens como revisor | Commits |
 |---|---|---|---|
-| Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 0 |
-| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 2 |
-| Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 6 |
+| Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 3 |
+| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 5 (+3 merges) |
+| Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 11 |
