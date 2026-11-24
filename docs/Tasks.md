@@ -64,24 +64,24 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
 | Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude, Claude Code, apoio no código) | `68c22e0` |
-| Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | ⬜ | | |
-| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🟡 | Sim (Claude, Claude Code, apoio nos testes) | `68c22e0` |
-| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🟡 | Sim (Claude, Claude Code, apoio nos testes) | `68c22e0` |
-| Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio.pdf` | DA | AL | ⬜ | | |
+| Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
+| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, a commitar |
+| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, a commitar |
+| Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto, falta passar para o PDF) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
 
 ### Item f — Catálogo de erros (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Padronizar as mensagens de erro (linha/coluna) nas três fases | `src/*.py` | DA | Todos | ⬜ | | |
-| Catálogo: tabela com mensagem, causa e exemplo (≥3 por categoria) | `docs/relatorio.pdf` | DA | MA | ⬜ | | |
+| Padronizar as mensagens de erro (linha/coluna) nas três fases | `src/*.py` | DA | Todos | 🟡 (lexer e interpretador no formato "Erro <fase> na linha X, coluna Y:"; falta conferir o parser) | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
+| Catálogo: tabela com mensagem, causa e exemplo (≥3 por categoria) | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | MA | 🟡 (falta conferir as mensagens sintáticas) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
 | Comentário com o resultado esperado no topo de cada teste inválido | `tests/invalidos/` | Cada dono do arquivo | DA | ⬜ | | |
-| Justificativa da estratégia de recuperação/diagnóstico | `docs/relatorio.pdf` | DA | AL | ⬜ | | |
+| Justificativa da estratégia de recuperação/diagnóstico | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto, falta passar para o PDF) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
 
 ### Item g — Testes, diário e relatório (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Testes de laço: executa 0, 1 e N vezes; for alterando a variável de controle | `tests/validos/test_lacos.py` | DA | AL | ⬜ | | |
-| Laço infinito com limite de iterações | `tests/invalidos/test_laco_infinito.py` | DA | MA | ⬜ | | |
+| Testes de laço: executa 0, 1 e N vezes; for alterando a variável de controle | `tests/validos/test_lacos.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
+| Laço infinito com limite de iterações | `tests/invalidos/test_laco_infinito.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
 | Diário de bordo (cada um registra a própria entrada) | `docs/diario_de_bordo.md` | **Todos** | — | 🟡 | | `fd6ed77`, `c4c0689`, `eb2e406`, `553dd0d` |
 | Relatório: pergunta de pesquisa + 3 a 4 exemplos de acerto/falha da IA (cada um traz pelo menos 1) | `docs/relatorio.pdf` | **Todos** | — | ⬜ | | |
 | Relatório: fundamentação teórica | `docs/relatorio.pdf` | MA | Todos | ⬜ | | |
@@ -141,6 +141,7 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 22/11/2026 | AL | Classes da AST e testes (PR #1); renomeia `relatorio.pdf` (PR #2); diário e posição sobre as decisões em aberto | `0ba5ceb`, `b419c69`, `eb2e406` | Claude Opus 5.5 (Claude Code) — código, testes e texto | DA |
 | 23/11/2026 | MA | Correções da revisão: `requirements.txt`, BOM no lexer, gramática, declaração de IA, diário | `b37aad9`, `5207802`, `70b0273`, `4af8332`, `553dd0d` | Claude Sonnet 5.5 — correções de código e texto | AL |
 | 24/11/2026 | DA | Merge dos PRs #1 e #2 e do branch de revisão (conflito no diário resolvido); revisão geral; BOM tratado em `tokenizar` + teste; saída esperada nos `.ml`; README; atualização deste arquivo | `dacbd73`, `ef6281a`, `5f20a59` | Claude Opus 5.5 (Claude Code) — revisão, correções e redação | |
+| 24/11/2026 | DA | Interpretador sobre a AST (S1–S5, limite de iterações), `dividir()` e `formatar_valor()`, testes de laço e de laço infinito, mensagens no formato do lexer, seções do relatório (tabela de símbolos, semântica operacional, catálogo de erros, diagnóstico) e entrada no diário | `3742f56`, a commitar | Claude Opus 5.5 (Claude Code) — código, testes e redação | |
 | | | | | | |
 
 ## Resumo por integrante

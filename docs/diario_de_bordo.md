@@ -144,3 +144,19 @@ montar o PDF final.
 **Dificuldades encontradas:** Distinguir erro léxico de erro sintático (o `programa_invalido.ml` passa pelo lexer sem erro, e só o parser o rejeita) e entender a construção dos subconjuntos do NUM.
 
 **Próximos passos:** Fechar as decisões em aberto com o grupo, escrever o exemplo concreto de uso de IA (2.1) e a justificativa geral (2.2) do relatório e enviar o `.docx` ao Alexandre até 25/11.
+
+## Atualização — 24/11/2026
+
+**Responsável:** Davi
+
+**Etapa:** interpretador sobre a AST, testes de laço, catálogo de erros e revisão geral do projeto.
+
+**O que foi feito:** fiz o merge dos PRs #1 (AST) e #2 (renomeação do relatório) e do branch `docs/revisao-a-b-alexandre`, resolvendo o conflito no diário (as entradas de Alexandre e Manuel foram mantidas, em ordem de data). Fiz uma revisão geral do repositório e corrigi: o BOM passou a ser removido em `tokenizar()`, e não só no `main` do lexer; os `.ml` ganharam a saída esperada no topo; o README ganhou requisitos, instruções de execução e a ferramenta de IA; o `Tasks.md` foi atualizado (commit `3742f56`). Defini duas regras que faltavam na gramática: a divisão trunca em direção a zero (`(0-7)/2 = -3`, e não `-4` como no `//` do Python) e o `print` mostra booleanos como `true`/`false`. Implementei o interpretador sobre a AST (classe `Interpretador`), com verificação das restrições S1 a S5 durante a execução, o `for` executado como `inicializacao; while (condicao) { corpo; atualizacao; }` e um limite de iterações por laço para detectar laço infinito. As mensagens do interpretador passaram a seguir o formato do lexer (`Erro semântico na linha X, coluna Y: ...`). Escrevi `test_lacos.py` (0, 1 e N iterações, `for` alterando a variável de controle, laços aninhados) e `test_laco_infinito.py`, e redigi as seções do relatório sobre tabela de símbolos, semântica operacional, catálogo de erros e estratégia de diagnóstico em `docs/relatorio_semantica_e_erros.md`.
+
+**Uso de IA:** Claude Opus 5.5 (Claude Code) para revisar o projeto, resolver o conflito de merge, gerar o interpretador, os testes e o texto das seções do relatório. Conferi o código e rodei os testes antes do commit. Um acerto da IA que vale registrar: ela apontou que, sem verificar o tipo antes de comparar, o Python avaliaria `1 == true` como verdadeiro (porque `True` é subclasse de `int`), e o teste `test_igualdade_entre_tipos_diferentes` cobre esse caso. Uma falha: na primeira tentativa, a IA tentou gravar os testes num único comando de shell, que falhou por erro de aspas e não gravou nada; os arquivos foram reescritos com o editor.
+
+**Testes realizados:** `python -m pytest -q`: 87 testes aprovados.
+
+**Dificuldades encontradas:** o interpretador foi escrito antes do parser, então a integração com os arquivos `.ml` (`python -m src.interpreter arquivo.ml`) só poderá ser testada quando o parser entrar na `main`. O teste `test_programa_valido_ml` monta à mão a mesma AST que o parser deve gerar para o `programa_valido.ml`.
+
+**Próximos passos:** revisar o parser do Alexandre quando o PR for aberto; testar o pipeline completo com os dois `.ml`; conferir as mensagens sintáticas do catálogo; passar as seções para o relatório em PDF; gravar a demo do vídeo.
