@@ -113,8 +113,20 @@ e o lexer já as implementam:
 
 Falta a confirmação do Manuel, que propôs as decisões, para marcar a tarefa como concluída.
 
-**Revisão (itens a e b, autor: Manuel):** [preencher depois de revisar: o que conferi, o que
-encontrei e as observações]
+**Revisão (itens a e b), feita em 23/11:** conferi a gramática, o `programa_invalido.ml`, o lexer,
+as tabelas de tokens e de transições e a seção "Análise léxica" do relatório. Executei o lexer em
+cada comportamento descrito na seção (`42;`, `a<=b`, `1x`, `é`, `while`/`whiles` e os dois tipos de
+comentário), e todos bateram com o texto. A construção dos subconjuntos do NUM (A = {q0},
+B = {q1, q2}, C = {q2, q3}) está correta, e os testes do lexer são 16 válidos e 10 inválidos.
+Pontos levantados: a seção de uso de IA do relatório não tinha um exemplo concreto (exigido no
+item g); a justificativa de que o lexer reconhece **exatamente** os tokens estava só no rascunho
+da seção 5.2 da gramática e não ligava o autômato ao código; o estado `q_div` da tabela é
+implementado por lookahead (`_seguinte()`) no código; o `requirements.txt` estava vazio (risco de
+nota zero pela obs. 10); e a tabela do relatório não tinha título. As correções entraram em 23/11
+(commits `b37aad9`, `5207802`, `70b0273` e `4af8332`). Em 24/11 li a versão corrigida da seção
+léxica: atendeu os pontos, e sugeri mais quatro ajustes (completar o parágrafo do BOM com a remoção
+em `tokenizar()`, ligar o BOM ao alfabeto Σ, citar o teste do BOM em vez do `git diff` e retirar a
+frase dos 34 testes, que ficou desatualizada).
 
 **Uso de IA:** Claude Opus 5.5, via Claude Code, para gerar a AST, o parser e os testes, conferir o
 trabalho contra o enunciado e redigir esta entrada. Revisei o código e o texto antes de registrar.
@@ -124,6 +136,14 @@ o README não declarava a ferramenta de IA e o teste da AST dependia do parser. 
 
 **Testes realizados:** `python -m pytest -q` com a AST e o parser juntos: 75 testes aprovados.
 Os 6 testes das três decisões passam.
+
+**Dificuldades encontradas:** organizar as entregas em branches separadas sabendo que o parser
+depende da AST. Ao criar a branch do parser antes de a AST entrar na `main`, os testes falharam com
+`ImportError`, porque `src/ast_nodes.py` ainda estava vazio naquela branch. A solução foi abrir a
+AST num PR próprio e só subir o parser depois. Outra dificuldade foi renomear `docs/Relatorio.pdf`
+para `docs/relatorio.pdf`: como o Windows não diferencia maiúsculas de minúsculas
+(`core.ignorecase = true`), o `git mv` direto não funcionaria, e foi preciso passar por um nome
+temporário.
 
 **Próximos passos:** enviar o parser depois do merge da AST; escrever as seções dos itens c e d do
 relatório (árvores sintáticas, justificativa formal, comparação com LL(1)/LR e diagrama da AST);
