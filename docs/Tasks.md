@@ -28,36 +28,36 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Item a — Definição formal da linguagem (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Alfabeto, EBNF, tabela de precedência/associatividade | `docs/gramatica.md` | MA | AL | 🔍 | Sim (Claude Sonnet 5.5, rascunho) | `0203694` |
+| Alfabeto, EBNF, tabela de precedência/associatividade | `docs/gramatica.md` | MA | AL | ✅ | Sim (Claude Sonnet 5.5, rascunho) | `0203694` |
 | 5 exemplos comentados (válido + inválido léxico/sintático/semântico) | `docs/gramatica.md` | MA | DA | 🔍 | Sim (Claude Sonnet 5.5 ,analise da documentação) | `0203694` |
 | Programa válido com while e for | `exemplos/programa_valido.ml` | MA | DA |  🔍| 	Sim (ChatGPT, apoio e revisão)|`c48e250` |
-| Programa inválido com laço mal formado | `exemplos/programa_invalido.ml` | MA | AL | 🔍 |	Sim (ChatGPT, apoio e revisão) | `c48e250` |
+| Programa inválido com laço mal formado | `exemplos/programa_invalido.ml` | MA | AL | ✅ |	Sim (ChatGPT, apoio e revisão) | `c48e250` |
 | Fechar as decisões em aberto (`/* */`, comparação não associativa, sem menos unário) | `docs/gramatica.md` | **Todos** | — | 🟡 | Sim (Claude Sonnet 5.5 e ChatGPT,revisão) |  `c48e250` |
 
 ### Item b — Lexer (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Implementação do lexer | `src/lexer.py` | MA | AL | 🔍 | Sim (Claude Sonnet 5.5,apoio nos teste)|`c48e250` |
-| Tabela de tokens e tabela de transições (seção "Lexer") | `docs/gramatica.md` | MA | AL | 🔍 | Sim  (Claude Sonnet 5.5,analise da documentação )| `0203694` |
+| Implementação do lexer | `src/lexer.py` | MA | AL | ✅ | Sim (Claude Sonnet 5.5,apoio nos teste)|`c48e250` |
+| Tabela de tokens e tabela de transições (seção "Lexer") | `docs/gramatica.md` | MA | AL | ✅ | Sim  (Claude Sonnet 5.5,analise da documentação )| `0203694` |
 | Testes válidos | `tests/validos/test_lexer_valido.py` | MA | DA | 🔍 | Sim (Claude Sonnet 5.5,apoio nos testes)|`c48e250` |
 | Testes inválidos (`@`, `1x`, comentário não fechado) | `tests/invalidos/test_lexer_invalido.py` | MA | DA | 🔍 |Sim (Claude Sonnet 5.5,apoio nos testes)  | `c48e250`  |
-| Relatório: seção "Análise léxica" (ER → AFN → AFD → lexer) | `docs/relatorio.pdf` | MA | AL | 🔍 | 	Sim (ChatGPT, apoio na documentação)| `c48e250` |
+| Relatório: seção "Análise léxica" (ER → AFN → AFD → lexer) | `docs/relatorio.pdf` | MA | AL | ✅ | 	Sim (ChatGPT, apoio na documentação)| `c48e250` |
 
 
 ### Item c — Parser descendente recursivo (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Implementação do parser | `src/parser.py` | AL | MA | 🟡 | Sim (Claude Opus 5.5, Claude Code, geração do código) | aguardando PR |
-| Testes válidos (incluindo while e for) | `tests/validos/test_parser_valido.py` | AL | MA | ⬜ | | |
-| Testes inválidos (incluindo laço mal formado) | `tests/invalidos/test_parser_invalido.py` | AL | MA | ⬜ | | |
+| Implementação do parser | `src/parser.py` | AL | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código) | `165eaa6` (PR #5) |
+| Testes válidos (incluindo while e for) | `tests/validos/test_parser_valido.py` | AL | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração dos testes) | `165eaa6` |
+| Testes inválidos (incluindo laço mal formado) | `tests/invalidos/test_parser_invalido.py` | AL | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração dos testes) | `165eaa6` |
 | Relatório: árvores de `1+2*3`, `(1+2)*3`, while e for, mais a justificativa formal | `docs/relatorio.pdf` | AL | DA | ⬜ | | |
 | Relatório: comparação com outra técnica (LL(1) com tabela / LR) | `docs/relatorio.pdf` | AL | MA | ⬜ | | |
 
 ### Item d — AST (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Classes da AST (incluindo While e For) — **fazer primeiro, porque o interpretador depende delas** | `src/ast_nodes.py` | AL | DA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código) | `0ba5ceb` |
-| Testes da AST (`1+2*3`, for com 3 cláusulas) | `tests/validos/test_ast.py` | AL | DA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração dos testes) | `0ba5ceb` |
+| Classes da AST (incluindo While e For) — **fazer primeiro, porque o interpretador depende delas** | `src/ast_nodes.py` | AL | DA | ✅ | Sim (Claude Opus 5.5, Claude Code, geração do código) | `0ba5ceb` |
+| Testes da AST (`1+2*3`, for com 3 cláusulas) | `tests/validos/test_ast.py` | AL | DA | ✅ | Sim (Claude Opus 5.5, Claude Code, geração dos testes) | `0ba5ceb` |
 | Relatório: diagrama da AST e justificativa árvore concreta × AST | `docs/relatorio.pdf` | AL | DA | ⬜ | | |
 
 ### Item e — Interpretador (1,0)
@@ -99,7 +99,7 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 ### Itens gerais
 | Tarefa | Arquivo | Responsável | Status |
 |---|---|---|---|
-| README: como executar, integrantes, ferramenta de IA | `README.md` | AL | 🔍 (rascunho feito por DA; falta o comando do parser/interpretador) |
+| README: como executar, integrantes, ferramenta de IA | `README.md` | AL | 🔍 (comandos do parser e do interpretador em `5534629`, PR #5) |
 | Declaração de IA: ferramenta/modelo, etapas e finalidade | `declaracao_IA.md` | **Todos** (cada um declara o próprio uso) | 🟡 (MA e DA feitos; falta AL confirmar a sua) |
 | Dependências (pytest) | `requirements.txt` | MA | ✅ `b37aad9` |
 
@@ -142,12 +142,13 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 23/11/2026 | MA | Correções da revisão: `requirements.txt`, BOM no lexer, gramática, declaração de IA, diário | `b37aad9`, `5207802`, `70b0273`, `4af8332`, `553dd0d` | Claude Sonnet 5.5 — correções de código e texto | AL |
 | 24/11/2026 | DA | Merge dos PRs #1 e #2 e do branch de revisão (conflito no diário resolvido); revisão geral; BOM tratado em `tokenizar` + teste; saída esperada nos `.ml`; README; atualização deste arquivo | `dacbd73`, `ef6281a`, `5f20a59` | Claude Opus 5.5 (Claude Code) — revisão, correções e redação | |
 | 24/11/2026 | DA | Interpretador sobre a AST (S1–S5, limite de iterações), `dividir()` e `formatar_valor()`, testes de laço e de laço infinito, mensagens no formato do lexer, seções do relatório (tabela de símbolos, semântica operacional, catálogo de erros, diagnóstico) e entrada no diário | `3742f56`, a commitar | Claude Opus 5.5 (Claude Code) — código, testes e redação | |
+| 23–25/11/2026 | AL | Revisão dos itens a e b; integração do parser com o interpretador (`parse`), testes do parser e README (PR #5); diário (PRs #4 e #6) | `165eaa6`, `5534629` | Claude Opus 5.5 (Claude Code) — código, testes, revisão e texto | |
 | | | | | | |
 
 ## Resumo por integrante
 
 | Integrante | Itens como responsável | Itens como revisor | Commits |
 |---|---|---|---|
-| Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 3 |
+| Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 6 |
 | Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 5 (+3 merges) |
 | Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 11 |
