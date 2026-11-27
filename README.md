@@ -23,8 +23,15 @@ pip install -r requirements.txt
 Todos os comandos são executados na raiz do repositório.
 
 ```bash
+# Compilador completo (lexer -> parser -> interpretador): executa o programa
+python -m src.interpreter exemplos/programa_valido.ml
+python -m src.interpreter exemplos/programa_invalido.ml
+
 # Análise léxica: lista os tokens (linha:coluna, tipo, lexema)
 python -m src.lexer exemplos/programa_valido.ml
+
+# Análise sintática: mostra a AST como texto indentado
+python -m src.parser exemplos/programa_valido.ml
 
 # Testes automatizados
 python -m pytest -q
