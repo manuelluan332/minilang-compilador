@@ -180,3 +180,39 @@ montar o PDF final.
 **Dificuldades encontradas:** o interpretador foi escrito antes do parser, então a integração com os arquivos `.ml` (`python -m src.interpreter arquivo.ml`) só poderá ser testada quando o parser entrar na `main`. O teste `test_programa_valido_ml` monta à mão a mesma AST que o parser deve gerar para o `programa_valido.ml`.
 
 **Próximos passos:** revisar o parser do Alexandre quando o PR for aberto; testar o pipeline completo com os dois `.ml`; conferir as mensagens sintáticas do catálogo; passar as seções para o relatório em PDF; gravar a demo do vídeo.
+
+## Atualização — 25/11/2026
+
+**Responsável:** Alexandre
+
+**Etapa:** integração do parser com o interpretador, README e revisões.
+
+**O que foi feito:** em 23/11, concluí a revisão dos itens a e b (registrada na entrada de 22/11)
+e passei a ler os arquivos `.ml` com `utf-8-sig` no `python -m src.parser`, para aceitar arquivos
+salvos com BOM. Em 24/11, li a versão corrigida da seção "Análise léxica" e sugeri quatro ajustes.
+Em 25/11, atualizei o repositório local, que estava 12 commits atrás da `main`, e integrei o parser
+ao interpretador: o `src/parser.py` ganhou `parse(tokens)`, a função que o `python -m src.interpreter`
+chama. Atualizei o teste do `programa_invalido.ml`, porque o arquivo ganhou comentários no topo e o
+erro do laço passou da linha 3 para a linha 7. No README, acrescentei os comandos do parser e do
+interpretador. PR #4 (diário) e PR #5 (parser e README, commits `165eaa6` e `5534629`).
+
+**Uso de IA:** Claude Opus 5.5, via Claude Code, para testar o parser sobre a `main` atualizada,
+fazer a integração com o interpretador, corrigir o teste e o README e redigir esta entrada. Revisei
+as alterações e rodei os testes antes de cada commit. Uma falha que exigiu correção: o teste do
+`programa_invalido.ml` fixava o erro na linha 3 e quebrou quando o arquivo de exemplo ganhou
+comentários. O conceito envolvido é que o lexer calcula a linha e a coluna de cada token sobre o
+texto inteiro, comentários incluídos.
+
+**Testes realizados:** `python -m pytest -q`: 122 testes aprovados. `python -m src.interpreter
+exemplos/programa_valido.ml` imprime `30`, `10` a `1` e `10`, a saída documentada no topo do arquivo.
+`python -m src.interpreter exemplos/programa_invalido.ml` dá "Erro sintático na linha 7, coluna 19:
+esperado ';', encontrado ')'".
+
+**Dificuldades encontradas:** manter o repositório local em dia enquanto o grupo trabalhava em
+paralelo. Com a cópia 12 commits atrás, o parser não tinha a função que o interpretador esperava,
+e o teste do arquivo de exemplo quebrou. O PR #3 também entrou na `main` antes de o campo da revisão
+ser preenchido, o que exigiu um commit novo (PR #4).
+
+**Próximos passos:** escrever as seções dos itens c e d do relatório; revisar o interpretador, a
+tabela de símbolos, os testes de laço e as seções de semântica e erros (sou o revisor do item e);
+conferir a minha seção do `declaracao_IA.md`; montar o PDF final; gravar o meu trecho do vídeo.
