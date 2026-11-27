@@ -16,7 +16,16 @@ rascunho inicial. O código do lexer (`src/lexer.py`) e os testes do lexer
 (`tests/validos/test_lexer_valido.py` e `tests/invalidos/test_lexer_invalido.py`) também
 foram gerados pelo Claude e, em seguida, executados e conferidos por mim (Manuel).
 
-**Modelos utilizados:** Claude Sonnet 5.5 (Anthropic) e ChatGPT (GPT-6, OpenAI).
+
+### Uso de inteligência artificial na Análise Léxica
+
+Na definição formal da linguagem (`docs/gramatica.md`: tokens, EBNF, precedência, tabela de transições e os 5 exemplos) e nos programas de exemplo (`exemplos/*.ml`), o Claude gerou o rascunho inicial. O código do lexer (`src/lexer.py`) e os testes do lexer (`tests/validos/test_lexer_valido.py` e `tests/invalidos/test_lexer_invalido.py`) também foram gerados pelo Claude e, em seguida, executados e conferidos por mim (Manuel).
+
+O Claude Sonnet 5.5 também foi usado para revisar e enxugar o texto da seção 2.1 do relatório e gerar o arquivo `docs/relatorio_analise_lexica.md`; o conteúdo foi conferido contra `docs/gramatica.md` e `src/lexer.py`.
+
+O ChatGPT, da OpenAI, foi usado para estudar expressões regulares, AFN, AFD, construção dos subconjuntos e minimização, e auxiliou na revisão e organização do texto da seção de Análise Léxica do relatório.
+
+A implementação foi submetida a testes automatizados com Pytest. Em 23/11, os 34 testes então disponíveis foram aprovados; em 27/11, com o trabalho do grupo integrado, a suíte do projeto passou com 125 testes, 26 deles do lexer. Os resultados dos testes não garantem a ausência de erros em todos os cenários possíveis.
 
 ### Uso de inteligência artificial na Análise Semântica (Davi)
 

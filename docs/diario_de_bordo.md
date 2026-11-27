@@ -252,3 +252,12 @@ seções do relatório dos itens c e d, a fundamentação e a montagem do PDF co
 
 **Próximos passos:** enviar ao Alexandre o texto final das seções e e f para a montagem do PDF;
 revisar as seções c e d quando ficarem prontas (sou o revisor); gravar a demo sem cortes do vídeo.
+
+Atualização — 27/11/2026
+Responsável: Manuel
+Etapa: relatório (seção 2.1 Análise léxica) e revisões.
+O que foi feito: finalizei a seção 2.1 do relatório com o AFN de Thompson do NUM, a justificativa formal e dois casos de IA (1x e for sem atualização); corrigi a contagem de testes (125 no projeto, 26 do lexer); subi a seção em docs/relatorio_analise_lexica.md para o Alexandre montar o PDF.
+Uso de IA: Claude Sonnet 5.5, para revisar e enxugar o texto da seção e gerar o arquivo Markdown. Conferi o conteúdo contra docs/gramatica.md e src/lexer.py.
+Testes realizados: pytest -q: 125 testes aprovados.
+Dificuldades: o texto original passava do espaço do relatório; o trecho da frase dos testes ficou quebrado em uma das edições e precisei refazer.
+Próximos passos: revisar o parser e os testes do Alexandre; gravar a parte do vídeo.
