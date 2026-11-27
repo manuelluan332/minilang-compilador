@@ -1,9 +1,9 @@
 # Seções do relatório — Análise semântica e catálogo de erros (Davi)
 
 > Texto-base das seções dos itens (e) e (f) para colar no `docs/relatorio.pdf`.
-> Todas as mensagens abaixo foram geradas pelo código atual (`src/lexer.py` e
-> `src/interpreter.py`). As mensagens sintáticas seguem o formato descrito pelo
-> Alexandre no diário (22/11) e devem ser conferidas quando o parser entrar na `main`.
+> Todas as mensagens do catálogo foram conferidas em 26/11, executando cada exemplo
+> pelo compilador completo (`tokenizar` → `parse` → `executar`) na `main` com o parser
+> integrado.
 
 ---
 
@@ -117,23 +117,22 @@ que causou o erro (para operações, o token do operador).
 | L4 | `a = b ! c;` | `Erro léxico na linha 1, coluna 7: '!' isolado (esperado '!=')` | Em q_bang só `=` tem transição |
 | L5 | `x = 1;` ↵ `/* sem fim` | `Erro léxico na linha 2, coluna 1: comentário de bloco não fechado` | EOF em q_bc ou q_bcs; a posição é a do `/*` de abertura |
 
-### 4.2 Erros sintáticos (`src/parser.py`)
-
-> Formato e mensagens descritos pelo Alexandre (diário, 22/11). Conferir com o parser.
+### 4.2 Erros sintáticos (`src/parser.py`, exceção `ParserError`)
 
 | # | Exemplo | Mensagem | Causa |
 |---|---|---|---|
 | P1 | `for (i = 0; i < 10) { ... }` (`programa_invalido.ml`) | `Erro sintático na linha 7, coluna 19: esperado ';', encontrado ')'` | Falta a cláusula de atualização: a produção `para` exige `atribuicao ";" expressao ";" atribuicao` |
-| P2 | `x = (1 + ;` | `Erro sintático …: esperado número, 'true', 'false', identificador ou '(', encontrado ';'` | Depois de `+` a produção `soma` exige um `termo`; `;` não está em FIRST(fator) |
+| P2 | `x = (1 + ;` | `Erro sintático na linha 1, coluna 10: esperado número, 'true', 'false', identificador ou '(', encontrado ';'` | Depois de `+` a produção `soma` exige um `termo`; `;` não está em FIRST(fator) |
 | P3 | `x = a < b < c;` | `Erro sintático na linha 1, coluna 11: esperado ';', encontrado '<'` | Comparação não associativa: `comparacao = soma [ op_comp soma ]` aceita no máximo um operador |
 | P4 | `x = -1;` | `Erro sintático na linha 1, coluna 5: esperado número, 'true', 'false', identificador ou '(', encontrado '-'` | Não há menos unário; `-` não está em FIRST(fator) |
-| P5 | `if (x > 0) print(x);` | `Erro sintático …: esperado '{', …` | O corpo de `if`/`while`/`for` é sempre um bloco |
+| P5 | `if (x > 0) print(x);` | `Erro sintático na linha 1, coluna 12: esperado '{', encontrado 'print'` | O corpo de `if`/`while`/`for` é sempre um bloco |
 
 ### 4.3 Erros semânticos (`src/interpreter.py`, exceção `ErroSemantico`)
 
 | # | Exemplo | Mensagem | Causa |
 |---|---|---|---|
 | S1 | `print(z);` (sem `z` definida) | `Erro semântico na linha 1, coluna 7: variável 'z' não definida` | Uso antes de qualquer atribuição (S1) |
+| S1′ | `for (i = 0; j < 10; i = i + 1) { }` | `Erro semântico na linha 1, coluna 13: variável 'j' não definida` | Variável de controle da condição nunca atribuída (S1, em laço) |
 | S2 | `y = 1 + true;` | `Erro semântico na linha 1, coluna 7: operador '+' exige operandos inteiros, mas recebeu int e bool` | Aritmética com booleano (S2) |
 | S3 | `x = 5 / 0;` | `Erro semântico na linha 1, coluna 7: divisão por zero` | Divisor avaliado como 0 (S3) |
 | S4 | `while (1 + 2) { ... }` | `Erro semântico na linha 1, coluna 10: a condição do while deve ser booleana, mas é int` | Condição inteira em `if`/`while`/`for` (S4) |
@@ -166,7 +165,7 @@ para continuar analisando).
    fase, a linha, a coluna, o que era esperado e o que foi encontrado, o que basta para
    localizar e corrigir a causa.
 
-**Separação por fase.** O tipo da exceção (`LexerError`, erro do parser e
+**Separação por fase.** O tipo da exceção (`LexerError`, `ParserError` e
 `ErroSemantico`) e o prefixo da mensagem ("Erro léxico", "Erro sintático", "Erro
 semântico") mostram em que fase o erro foi detectado. Isso ilustra a diferença entre as
 fases: `1x` é rejeitado pelo AFD; `for (i = 0; i < 10)` passa pelo lexer e só o parser

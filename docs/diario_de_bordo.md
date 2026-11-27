@@ -216,3 +216,39 @@ ser preenchido, o que exigiu um commit novo (PR #4).
 **Próximos passos:** escrever as seções dos itens c e d do relatório; revisar o interpretador, a
 tabela de símbolos, os testes de laço e as seções de semântica e erros (sou o revisor do item e);
 conferir a minha seção do `declaracao_IA.md`; montar o PDF final; gravar o meu trecho do vídeo.
+
+## Atualização — 26/11/2026
+
+**Responsável:** Davi
+
+**Etapa:** integração final, conferência do catálogo de erros e testes de variável de controle.
+
+**O que foi feito:** fiz o merge dos PRs #4, #5 (parser integrado) e #6 do Alexandre. Com o parser
+na `main`, executei os 17 exemplos do catálogo (os 16 anteriores e o S1′ novo) de erros pelo compilador completo
+(`tokenizar` → `parse` → `executar`): todas as mensagens saíram exatamente como documentadas, e as
+três fases usam o mesmo formato `Erro <fase> na linha L, coluna C: ...`. Completei as mensagens
+sintáticas P2 e P5, que estavam abreviadas no catálogo, e troquei "erro do parser" pelo nome real da
+exceção, `ParserError`. Na conferência contra o enunciado, percebi que o item (e) pede um teste de
+rejeição com **variável de controle não definida** em laço, e o `test_interpreter_invalido.py` só
+testava variável não definida fora de laço. Acrescentei três testes: `while (k < 3)` sem `k`,
+`for (i = 0; j < 10; i = i + 1)` sem `j` (o teste confirma que a inicialização roda, que o erro
+aparece no primeiro teste da condição e que o corpo nunca executa) e o mesmo `for` ponta a ponta,
+do código-fonte ao erro (lexer → parser → interpretador), que é o primeiro teste da suíte a passar
+pelas três fases. O caso também entrou no catálogo (S1′). No `src/interpreter.py`, troquei o
+`getattr(parser, "ParserError", ...)`, que existia enquanto o parser não estava na `main`, pelo
+import direto de `ParserError`. Atualizei o `Tasks.md` com os commits e o status das minhas tarefas.
+
+**Uso de IA:** Claude Opus 5.5 (Claude Code) para conferir o projeto contra o enunciado, rodar os
+exemplos do catálogo, escrever os dois testes novos e redigir esta entrada. Conferi o diff e rodei
+a suíte antes do commit. Antes do commit, pedi ao agente revisor do Claude Code uma revisão
+independente: ele apontou que o teste do `for` não verificava de fato a inicialização, que faltava
+um teste ponta a ponta e que a contagem de exemplos estava errada (16 em vez de 17); corrigi os três. A lacuna dos testes de variável de controle não foi apontada quando a IA
+gerou os testes em 24/11; só apareceu agora, comparando cada entrega do item (e) com o que existia.
+
+**Testes realizados:** `python -m pytest -q`: 125 testes aprovados.
+
+**Dificuldades encontradas:** nenhuma técnica. O cuidado foi não mexer nas partes dos colegas: as
+seções do relatório dos itens c e d, a fundamentação e a montagem do PDF continuam com os responsáveis.
+
+**Próximos passos:** enviar ao Alexandre o texto final das seções e e f para a montagem do PDF;
+revisar as seções c e d quando ficarem prontas (sou o revisor); gravar a demo sem cortes do vídeo.

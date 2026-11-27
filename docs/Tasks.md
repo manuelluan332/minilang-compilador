@@ -64,25 +64,25 @@ Status: ⬜ não iniciado · 🟡 em andamento · 🔍 em revisão · ✅ conclu
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
 | Tabela de símbolos (inserção e busca) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude, Claude Code, apoio no código) | `68c22e0` |
-| Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
-| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, a commitar |
-| Testes inválidos (condição não booleana, variável não definida) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, a commitar |
-| Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto, falta passar para o PDF) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
+| Interpretador sobre a AST (incluindo while e for) | `src/interpreter.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `3f80cd1` |
+| Testes válidos | `tests/validos/test_interpreter_valido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, `3f80cd1` |
+| Testes inválidos (condição não booleana, variável não definida, inclusive variável de controle de laço) | `tests/invalidos/test_interpreter_invalido.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `68c22e0`, `3742f56`, `3f80cd1`, a commitar |
+| Relatório: tabela de símbolos, semântica operacional e justificativa | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto e conferido; falta entrar no PDF na montagem final) | Sim (Claude Opus 5.5, Claude Code, redação) | `3f80cd1` |
 
 ### Item f — Catálogo de erros (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Padronizar as mensagens de erro (linha/coluna) nas três fases | `src/*.py` | DA | Todos | 🟡 (lexer e interpretador no formato "Erro <fase> na linha X, coluna Y:"; falta conferir o parser) | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
-| Catálogo: tabela com mensagem, causa e exemplo (≥3 por categoria) | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | MA | 🟡 (falta conferir as mensagens sintáticas) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
-| Comentário com o resultado esperado no topo de cada teste inválido | `tests/invalidos/` | Cada dono do arquivo | DA | ⬜ | | |
-| Justificativa da estratégia de recuperação/diagnóstico | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto, falta passar para o PDF) | Sim (Claude Opus 5.5, Claude Code, redação) | a commitar |
+| Padronizar as mensagens de erro (linha/coluna) nas três fases | `src/*.py` | DA | Todos | 🔍 (as três fases no formato "Erro <fase> na linha X, coluna Y:", conferido em 26/11) | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `3f80cd1`, `165eaa6` |
+| Catálogo: tabela com mensagem, causa e exemplo (≥3 por categoria) | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | MA | 🟡 (17 exemplos executados e conferidos em 26/11; falta entrar no PDF) | Sim (Claude Opus 5.5, Claude Code, redação) | `3f80cd1`, a commitar |
+| Comentário com o resultado esperado no topo de cada teste inválido | `tests/invalidos/` | Cada dono do arquivo | DA | ✅ (os quatro arquivos conferidos por DA em 26/11) | | `c48e250`, `165eaa6`, `3f80cd1` |
+| Justificativa da estratégia de recuperação/diagnóstico | `docs/relatorio_semantica_e_erros.md` → `relatorio.pdf` | DA | AL | 🟡 (texto pronto; falta entrar no PDF na montagem final) | Sim (Claude Opus 5.5, Claude Code, redação) | `3f80cd1` |
 
 ### Item g — Testes, diário e relatório (1,0)
 | Tarefa | Arquivo | Responsável | Revisor | Status | IA usada? | Commit |
 |---|---|---|---|---|---|---|
-| Testes de laço: executa 0, 1 e N vezes; for alterando a variável de controle | `tests/validos/test_lacos.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
-| Laço infinito com limite de iterações | `tests/invalidos/test_laco_infinito.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | a commitar |
-| Diário de bordo (cada um registra a própria entrada) | `docs/diario_de_bordo.md` | **Todos** | — | 🟡 | | `fd6ed77`, `c4c0689`, `eb2e406`, `553dd0d` |
+| Testes de laço: executa 0, 1 e N vezes; for alterando a variável de controle | `tests/validos/test_lacos.py` | DA | AL | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `3f80cd1` |
+| Laço infinito com limite de iterações | `tests/invalidos/test_laco_infinito.py` | DA | MA | 🔍 | Sim (Claude Opus 5.5, Claude Code, geração do código e dos testes) | `3f80cd1` |
+| Diário de bordo (cada um registra a própria entrada) | `docs/diario_de_bordo.md` | **Todos** | — | 🟡 | | `fd6ed77`, `c4c0689`, `eb2e406`, `553dd0d`, `3f80cd1`, `acc205f`, `2e4e2cd`, a commitar |
 | Relatório: pergunta de pesquisa + 3 a 4 exemplos de acerto/falha da IA (cada um traz pelo menos 1) | `docs/relatorio.pdf` | **Todos** | — | ⬜ | | |
 | Relatório: fundamentação teórica | `docs/relatorio.pdf` | MA | Todos | ⬜ | | |
 | Montagem final do PDF (2 a 3 páginas na parte de análise) | `docs/relatorio.pdf` | AL | Todos | ⬜ | | |
@@ -141,8 +141,9 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | 22/11/2026 | AL | Classes da AST e testes (PR #1); renomeia `relatorio.pdf` (PR #2); diário e posição sobre as decisões em aberto | `0ba5ceb`, `b419c69`, `eb2e406` | Claude Opus 5.5 (Claude Code) — código, testes e texto | DA |
 | 23/11/2026 | MA | Correções da revisão: `requirements.txt`, BOM no lexer, gramática, declaração de IA, diário | `b37aad9`, `5207802`, `70b0273`, `4af8332`, `553dd0d` | Claude Sonnet 5.5 — correções de código e texto | AL |
 | 24/11/2026 | DA | Merge dos PRs #1 e #2 e do branch de revisão (conflito no diário resolvido); revisão geral; BOM tratado em `tokenizar` + teste; saída esperada nos `.ml`; README; atualização deste arquivo | `dacbd73`, `ef6281a`, `5f20a59` | Claude Opus 5.5 (Claude Code) — revisão, correções e redação | |
-| 24/11/2026 | DA | Interpretador sobre a AST (S1–S5, limite de iterações), `dividir()` e `formatar_valor()`, testes de laço e de laço infinito, mensagens no formato do lexer, seções do relatório (tabela de símbolos, semântica operacional, catálogo de erros, diagnóstico) e entrada no diário | `3742f56`, a commitar | Claude Opus 5.5 (Claude Code) — código, testes e redação | |
+| 24/11/2026 | DA | Interpretador sobre a AST (S1–S5, limite de iterações), `dividir()` e `formatar_valor()`, testes de laço e de laço infinito, mensagens no formato do lexer, seções do relatório (tabela de símbolos, semântica operacional, catálogo de erros, diagnóstico) e entrada no diário | `3742f56`, `3f80cd1` | Claude Opus 5.5 (Claude Code) — código, testes e redação | |
 | 23–25/11/2026 | AL | Revisão dos itens a e b; integração do parser com o interpretador (`parse`), testes do parser e README (PR #5); diário (PRs #4 e #6) | `165eaa6`, `5534629` | Claude Opus 5.5 (Claude Code) — código, testes, revisão e texto | |
+| 26/11/2026 | DA | Merge dos PRs #4, #5 e #6; execução dos 17 exemplos do catálogo pelo compilador completo; mensagens sintáticas completadas (P2, P5) e `ParserError` no catálogo; testes de variável de controle não definida em `while` e `for` (incluindo um ponta a ponta); import direto de `ParserError` no interpretador; atualização deste arquivo e do diário | `99ab7b2`, `2d623ad`, `b5f7e75`, a commitar | Claude Opus 5.5 (Claude Code) — conferência, testes e redação | |
 | | | | | | |
 
 ## Resumo por integrante
@@ -150,5 +151,5 @@ Preencher ao concluir cada tarefa. É a evidência de quem fez o quê.
 | Integrante | Itens como responsável | Itens como revisor | Commits |
 |---|---|---|---|
 | Alexandre (AL) | c, d, README, montagem do relatório, trecho de IA no vídeo | a, b, e, f | 6 |
-| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 5 (+3 merges) |
+| Davi (DA) | e, f, testes de laço, demo no vídeo | a, b, c, d | 8 (+6 merges) |
 | Manuel (MA) | a, b, fundamentação teórica, arquitetura no vídeo | c, e, f, g | 11 |

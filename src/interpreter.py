@@ -1,6 +1,6 @@
 """Interpretador da MiniLang: tabela de símbolos e execução sobre a AST.
 
-Uso (a partir do código-fonte, depois que o parser estiver integrado):
+Uso (pipeline completo: lexer -> parser -> interpretador):
     python -m src.interpreter exemplos/programa_valido.ml
 """
 
@@ -269,10 +269,9 @@ def executar(programa, escrever=print, limite_iteracoes=LIMITE_ITERACOES):
 
 
 if __name__ == "__main__":
-    # Pipeline completo: lexer -> parser -> interpretador. Depende do
-    # src/parser.py expor parse(tokens) devolvendo um nó Programa.
+    # Pipeline completo: lexer -> parser -> interpretador.
     from src.lexer import LexerError, tokenizar
-    from src import parser
+    from src.parser import ParserError, parse
 
     if len(sys.argv) != 2:
         print("uso: python -m src.interpreter <arquivo.ml>")
@@ -280,7 +279,7 @@ if __name__ == "__main__":
     with open(sys.argv[1], encoding="utf-8-sig") as arquivo:
         texto = arquivo.read()
     try:
-        executar(parser.parse(tokenizar(texto)))
-    except (LexerError, ErroSemantico, getattr(parser, "ParserError", LexerError)) as erro:
+        executar(parse(tokenizar(texto)))
+    except (LexerError, ParserError, ErroSemantico) as erro:
         print(erro)
         sys.exit(1)

@@ -5,6 +5,8 @@ no formato "Erro semântico na linha X, coluna Y: <mensagem>".
 
   - buscar variável nunca definida -> "variável 'z' não definida"                    (S1)
   - print(z + 1) sem z definida    -> "variável 'z' não definida"                    (S1)
+  - while (k < 3) { k = k + 1; }   -> "variável 'k' não definida"  (variável de controle, S1)
+  - for (i = 0; j < 10; i = i + 1) -> "variável 'j' não definida"  (variável de controle, S1)
   - y = 1 + true;                  -> "operador '+' exige operandos inteiros, mas recebeu int e bool"  (S2)
   - print(true * 2);               -> "operador '*' exige operandos inteiros, ..."   (S2)
   - x = 5 / 0;                     -> "divisão por zero"                             (S3)
@@ -30,7 +32,9 @@ from src.ast_nodes import (
     Var,
     While,
 )
-from src.interpreter import ErroSemantico, TabelaSimbolos, dividir, executar
+from src.interpreter import ErroSemantico, Interpretador, TabelaSimbolos, dividir, executar
+from src.lexer import tokenizar
+from src.parser import parse
 
 
 def erro_ao_rodar(*comandos):
@@ -67,6 +71,48 @@ def test_variavel_nao_definida_dentro_de_expressao():
     e = erro_ao_rodar(Print(BinOp("+", Var("z", linha=2, coluna=7), Num(1))))
     assert e.mensagem == "variável 'z' não definida"
     assert (e.linha, e.coluna) == (2, 7)
+
+
+def test_variavel_de_controle_do_while_nao_definida():
+    # while (k < 3) { k = k + 1; }  sem atribuir k antes do laço
+    e = erro_ao_rodar(
+        While(
+            BinOp("<", Var("k", linha=1, coluna=8), Num(3)),
+            Bloco([Atribuicao("k", BinOp("+", Var("k"), Num(1)))]),
+        )
+    )
+    assert e.mensagem == "variável 'k' não definida"
+    assert (e.linha, e.coluna) == (1, 8)
+
+
+def test_variavel_de_controle_do_for_nao_definida():
+    # for (i = 0; j < 10; i = i + 1) { }  a condição usa j, que nunca foi definida;
+    # a inicialização roda antes, então o erro aparece no primeiro teste da condição
+    saida = []
+    interp = Interpretador(escrever=saida.append)
+    with pytest.raises(ErroSemantico) as info:
+        interp.executar(
+            Programa([
+                For(
+                    Atribuicao("i", Num(0)),
+                    BinOp("<", Var("j", linha=1, coluna=13), Num(10)),
+                    Atribuicao("i", BinOp("+", Var("i"), Num(1))),
+                    Bloco([Print(Var("i"))]),
+                )
+            ])
+        )
+    assert info.value.mensagem == "variável 'j' não definida"
+    assert (info.value.linha, info.value.coluna) == (1, 13)
+    assert saida == []  # o corpo nunca executa
+    assert interp.tabela.buscar("i").valor == 0  # a inicialização executou
+
+
+def test_variavel_de_controle_nao_definida_ponta_a_ponta():
+    # Do código-fonte ao erro: lexer -> parser -> interpretador (catálogo, caso S1')
+    codigo = "for (i = 0; j < 10; i = i + 1) { print(i); }"
+    with pytest.raises(ErroSemantico) as info:
+        executar(parse(tokenizar(codigo)), escrever=lambda _: None)
+    assert str(info.value) == "Erro semântico na linha 1, coluna 13: variável 'j' não definida"
 
 
 # --- S2: aritmética só com inteiros ----------------------------------------------
